@@ -1,0 +1,471 @@
+<title>Akte 23/89</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+/* Layout: eine Spalte wie ein Aktenbogen auf dem Schreibtisch. Typewriter-Schrift, Stempel, handschriftliche Vermerke. */
+:root{
+  --bg:#e7dcbd; --paper:#f6efdb; --paper2:#eee3c4; --ink:#241f17; --muted:#65583b; --line:#a39266;
+  --accent:#a3261c; --hand:#1c2d6e; --ok:#2e6a3a; --focus:#1c2d6e;
+  --f-display:'Special Elite','Courier New',monospace; --f-body:'Courier Prime','Courier New',monospace; --f-hand:'Caveat','Bradley Hand',cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#15130e; --paper:#221f17; --paper2:#2c281c; --ink:#eadfc2; --muted:#b3a37d; --line:#6d5f3d;
+  --accent:#e5766a; --hand:#aab9ff; --ok:#82c78f; --focus:#aab9ff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15130e; --paper:#221f17; --paper2:#2c281c; --ink:#eadfc2; --muted:#b3a37d; --line:#6d5f3d;
+  --accent:#e5766a; --hand:#aab9ff; --ok:#82c78f; --focus:#aab9ff; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-block:16px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+header{display:flex;flex-direction:column;gap:6px;position:relative;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.mark{font-family:var(--f-display);font-size:clamp(28px,8vw,40px);line-height:1;letter-spacing:.03em;margin:0;cursor:default;user-select:none;-webkit-user-select:none}
+.sub{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stamp{position:absolute;right:0;top:2px;border:2.5px solid var(--accent);color:var(--accent);font-weight:700;letter-spacing:.18em;font-size:12px;padding:2px 8px;transform:rotate(5deg);opacity:.9}
+.frags{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.frags[hidden]{display:none}
+.frag{border:1.5px dashed var(--line);padding:6px 4px;text-align:center;min-width:0;background:transparent;color:var(--muted)}
+.frag b{display:block;font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.1;color:var(--muted)}
+.frag span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;overflow-wrap:anywhere}
+.frag.on{border:1.5px solid var(--ink);background:var(--paper);color:var(--ink)}
+.frag.on b{color:var(--accent)}
+.frag.new{animation:pop .5s ease-out}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.frag.new{animation:none}}
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--ink)}
+.tab{flex:1;background:transparent;border:0;border-bottom:4px solid transparent;margin-bottom:-2px;padding:10px 8px;font-family:var(--f-display);font-size:17px;letter-spacing:.05em;cursor:pointer;color:var(--muted)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sheet{background:var(--paper);border:1.5px solid var(--line);padding:20px 18px;display:flex;flex-direction:column;gap:14px;position:relative;overflow-wrap:anywhere}
+.kap{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;display:flex;justify-content:space-between;gap:12px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(26px,7vw,34px)}
+h2{font-size:21px}
+h3{font-size:17px;letter-spacing:.03em}
+p{margin:0}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0}
+.meta dt{color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:11px;padding-top:2px}
+.meta dd{margin:0}
+form{display:flex;flex-direction:column;gap:12px;border:2px solid var(--ink);padding:14px;background:var(--paper2)}
+label{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+input[type=text],input[type=password],select{width:100%;font-size:19px;padding:11px 12px;border:1.5px solid var(--ink);background:var(--paper);border-radius:0;letter-spacing:.04em}
+input::placeholder{color:var(--muted);opacity:.8}
+.btn{font-family:var(--f-display);font-size:19px;letter-spacing:.06em;padding:12px 18px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;min-height:48px}
+.btn:hover{background:var(--accent);border-color:var(--accent)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--paper2);color:var(--ink);border-color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.msg{border-left:4px solid var(--accent);padding:6px 0 6px 12px;font-weight:700;min-height:0}
+.msg:empty{display:none}
+.msg.ok{border-left-color:var(--ok)}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}}
+.hints{display:flex;flex-direction:column;gap:8px}
+.hint{border-left:4px solid var(--hand);padding:2px 0 2px 12px;font-family:var(--f-hand);font-size:23px;line-height:1.15;color:var(--hand)}
+.hintbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.fm{border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column;gap:8px}
+.fm .t{font-family:var(--f-display);font-size:20px;letter-spacing:.06em}
+.big{font-family:var(--f-display);font-size:24px;letter-spacing:.04em;color:var(--accent)}
+.doc{border:1.5px solid var(--line);padding:12px 14px;background:var(--paper2);display:flex;flex-direction:column;gap:6px}
+.doc .dk{display:flex;justify-content:space-between;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.doc.note p.tx,.doc.story p.tx{font-family:var(--f-hand);font-size:24px;line-height:1.15;color:var(--hand)}
+.next{font-weight:700;padding:10px 12px;border:2px dashed var(--ink)}
+.audio{border:2px solid var(--ink);padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--paper2)}
+audio{width:100%}
+.trans{display:flex;flex-direction:column;gap:8px;border-left:4px solid var(--line);padding-left:12px;font-size:15px}
+.trans p{margin:0}
+.small{font-size:13px;color:var(--muted)}
+.foot{font-size:12px;color:var(--muted);text-align:center;padding-top:6px;letter-spacing:.04em}
+.pbar{display:flex;gap:4px}
+.pbar i{flex:1;height:6px;background:var(--line);opacity:.5}
+.pbar i.d{background:var(--accent);opacity:1}
+.nav .btn{min-height:40px;font-size:16px;padding:8px 14px}
+.gm{border:2px solid var(--accent);padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.quote{font-family:var(--f-display);font-size:22px;line-height:1.25;border-left:5px solid var(--accent);padding-left:14px;text-wrap:balance}
+ul.q{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.sr{position:absolute;left:-9999px}
+</style>
+
+<div class="wrap" id="app">
+  <header>
+    <div class="stamp" aria-hidden="true">FIKTION</div>
+    <h1 class="mark" id="mark">AKTE 23/89</h1>
+    <div class="sub">Die letzte Übermittlung</div>
+  </header>
+  <section class="frags" id="frags" aria-label="Funkfragmente"></section>
+  <nav class="tabs" role="tablist" aria-label="Ansicht">
+    <button class="tab" role="tab" id="tab-task" aria-selected="true" data-tab="task">Aufgabe</button>
+    <button class="tab" role="tab" id="tab-akte" aria-selected="false" data-tab="akte">Akte</button>
+  </nav>
+  <main id="main"></main>
+  <div id="gmslot"></div>
+  <p class="foot">Alle Personen, Dokumente und Organisationen dieser Akte sind erfunden. Die Geschichte dahinter ist echt.</p>
+  <p class="foot"><button type="button" id="gmopen" style="background:none;border:0;color:inherit;font:inherit;text-decoration:underline;opacity:.7;padding:10px">Spielleitung</button></p>
+</div>
+
+<script>
+const DATA = {"stations": [{"id": "login", "kapitel": "Prolog", "title": "Das Kennwort der Kartei", "place": "Altstädter Ring, am Jan-Hus-Denkmal", "paper": "Brief P0", "icon": "key", "scene": "Der Umschlag aus dem Wörterbuch hat euch hierher geführt. Die Kartei öffnet sich nur dem, der ihren Wahlspruch liest. Er steht auf dem Denkmal. Lest ihn dort ab, bevor ihr tippt.", "fields": [{"id": "w", "label": "Kennwort", "type": "text", "ph": "erstes Wort des Spruchs"}], "wrong": ["Falsches Wort. Der Spruch ist auf Tschechisch. Du brauchst nur das erste Wort."], "success": "Die Kartei öffnet sich. Willkommen, Archivar.", "unlock": [{"kind": "story", "title": "Prolog", "text": "Februar 1948, Prag. Die Buchbinderin Ludmila Ostrá beginnt, auf Karteikarten festzuhalten, was gewöhnliche Menschen erlebt haben. Die Kartei nimmt nur auf, was sich belegen lässt. Im November 1989 will ihr Funkpartner Vojtěch Kubát noch eine letzte Nachricht schicken. Sie kommt nie vollständig an. Heute fehlen sechs Wörter. Setzt sie zusammen."}, {"kind": "story", "title": "Hintergrund (historisch): Der Mann auf dem Sockel", "text": "Jan Hus, Prediger und Magister der Prager Universität, wurde am 6. Juli 1415 beim Konzil von Konstanz als Ketzer verbrannt. Für viele Tschechen wurde er zum Symbol für Wahrhaftigkeit und Gewissen. Das Denkmal auf dem Altstädter Ring schuf Ladislav Šaloun, enthüllt wurde es am 6. Juli 1915, zum 500. Todestag. Der Spruch, den ihr heute gelesen habt, wird Hus zugeschrieben und ist bis heute ein tschechischer Wahlspruch. Der Platz selbst war oft Bühne der Geschichte: Hinrichtungen, Feiern, Aufmärsche. Genau deshalb beginnt die Kartei hier."}], "nextplace": "Bleibt am Altstädter Ring. Der erste Zeugenzettel wartet.", "hints": ["Der Spruch steht auf dem Denkmal selbst, am Sockel. Er ist kurz.", "Der Spruch ist auf Tschechisch. Du brauchst nur das erste Wort.", "Es beginnt mit M und hat sieben Buchstaben."], "h": {"w": "3d7444c11a04c25af1f72599d3cd6248542c5aa0097daecebf066ddfef65bda9"}}, {"id": "st1", "kapitel": "Station 1", "title": "Der Balkon", "place": "Altstädter Ring, vor dem Palais Kinský", "paper": "Zeugenzettel Nr. 1 (P1)", "icon": "balcony", "scene": "1948 wurde auf diesem Platz ein Machtwechsel inszeniert. Selma holt den ersten Zeugenzettel aus dem Wörterbuch. Findet vor Ort den Balkon, von dem die Rede kam. Auf dem Zettel stimmt ein Datum nicht.", "fields": [{"id": "d", "label": "Datum der Balkonrede", "type": "date", "ph": "TT.MM.JJJJ"}], "wrong": ["Das war ein anderer Tag. Prüft den Wochentag."], "success": "Richtig. Ein Datum war falsch, und die Zeugin hat es nicht gemerkt. Das Fragment gehört euch.", "unlock": [{"kind": "fragment", "name": "DER BALKON", "group": "17"}, {"kind": "doc", "title": "Vermerk Dienststelle K-9 (1)", "text": "Die Gruppe „Moldau“ sammelt Namen. Es besteht der Verdacht, dass die Namen von Mitarbeitern der Sicherheitsorgane stammen. Maßnahme: Beobachtung."}, {"kind": "story", "title": "Hintergrund (historisch): Februar 1948", "text": "Im Februar 1948 trat die kommunistische Partei die Macht in der Tschechoslowakei an. Zwölf nichtkommunistische Minister reichten am 20. Februar ihren Rücktritt ein, Präsident Beneš nahm ihn am 25. Februar an. Dazwischen, am 21. Februar, sprach Klement Gottwald vor Tausenden auf dem Altstädter Ring. Der Platz war als Bühne gewählt: Kein Sturm auf das Parlament, sondern Volksfest und Druck der Straße. Danach folgten Verhaftungen, Säuberungen und Schauprozesse. Das Palais Kinský, vor dem ihr steht, gehört heute zur Nationalgalerie. Ludmilas Kartei beginnt in diesem Monat. Die Figuren und ihre Zettel sind erfunden, die Tage nicht."}], "nextplace": "Nächster Ort: Národní třída 16, Ecke Mikulandská.", "hints": ["Welcher Tag war das? Samstag. Welche Samstage hatte der Februar 1948? (7., 14., 21., 28.)", "Wann traten die zwölf Minister zurück? (20. Februar)", "Der Tag danach."], "h": {"d": "0cdf3c9f9039ec32b2a099cfbf2740600586ba488452543b04062a0cae00d801"}}, {"id": "st2", "kapitel": "Station 2", "title": "Die leeren Hände", "place": "Národní třída 16, Ecke Mikulandská", "paper": "Funkprotokoll (P2)", "icon": "hands", "scene": "Yvonne erzählt von Kubáts Protokoll über die Novembertage 1989. An der Fassade dieses Hauses hängt eine Bronzetafel. Löst das Funkprotokoll und zählt vor Ort die Hände.", "fields": [{"id": "w", "label": "Lösungswort", "type": "text", "ph": "ein Wort"}, {"id": "n", "label": "Anzahl der Hände", "type": "int", "ph": "Zahl"}], "fw": {"w": "Die Buchstaben ergeben kein Wort.", "n": "Die Zahl der Hände stimmt nicht. Schaut noch einmal auf die Tafel."}, "wrong": ["Das passt nicht. Beides muss stimmen."], "success": "Ein Wort. Es sind die Menschen, um die es geht.", "unlock": [{"kind": "fragment", "name": "DIE HÄNDE", "group": "55"}, {"kind": "story", "title": "Hintergrund (historisch): 17. November 1989", "text": "Am 17. November 1989 erinnerten Studierende an Jan Opletal, den die Nationalsozialisten 1939 ermordet hatten. Der Internationale Studententag geht darauf zurück: 1939 wurden tschechische Hochschulen geschlossen, Studentenführer hingerichtet, über tausend Studierende in Lager gebracht. Der Marsch 1989 wurde vom Jugendverband offiziell organisiert, am Nachmittag waren es etwa 15.000 Menschen. Er führte nach Vyšehrad und dann in die Innenstadt. Gegen 19:30 riegelte die Bereitschaftspolizei die Národní třída ab und schlug zu. Noch am selben Abend beschlossen Studierende und Theaterleute zu streiken. Zwei Tage später gründete sich das Bürgerforum. Die Gedenktafel an dieser Stelle erinnert an den Abend."}], "nextplace": "Band eins ist da. Hört gemeinsam zu.", "hints": ["Eine Karte nennt einen Freitag. Wann war der? (17. November)", "Die Zeithinweise zählen von Karte zu Karte weiter.", "Die Reihenfolge beginnt mit Z, E, U … Die Tafel hängt an der Fassade des Hauses an der Ecke Mikulandská/Národní."], "h": {"w": "9bec71df9aa4f6ec7c1adf07ac3af0df2811c175b7a962f445a8783db6949cfe", "n": "ee20b94b959178b719a14f89a11c6a9dd1bf9bf09bf93bd5aab783779f994d05"}}, {"id": "aud1", "kapitel": "Band eins", "title": "Ludmila am Band", "place": "Hier, an der Národní třída", "audio": "a1", "paper": "Kopfhörer teilen oder Lautsprecher", "icon": "tape", "scene": "Ludmila Ostrá hat im Frühjahr 1989 ein Band besprochen. Hört es gemeinsam an und löst, was sie am Ende fragt.", "fields": [{"id": "y", "label": "Jahreszahl", "type": "year", "ph": "JJJJ"}], "wrong": ["Das ist nicht die Jahreszahl des Steins."], "success": "Der Stein liegt. Weiter.", "unlock": [], "nextplace": "Nächster Ort: Palachovo náměstí vor der Philosophischen Fakultät, neben dem Rudolfinum.", "hints": ["Wer hat den Stein gelegt?", "Es ist die Karlsbrücke.", "Die Ziffern 1-3-5-7 am Anfang der Folge."], "h": {"y": "3139d4564a9f777ce17dc5ba4d167d81a777b1ca473e3fad583e43aed3b02279"}}, {"id": "stp", "kapitel": "Station 3", "title": "Palach", "place": "Náměstí Jana Palacha, vor der Philosophischen Fakultät", "paper": "Zeugenzettel Nr. 27 (P7)", "icon": "square", "scene": "Ein ruhiger Platz am Fluss. Jan Palach studierte an dieser Fakultät. An der linken Seite des Gebäudes seht ihr sein bronzenes Gesicht. Nehmt euch einen Moment. Dann löst den Zeugenzettel.", "fields": [{"id": "d", "label": "Datum des Tages auf dem Wenzelsplatz", "type": "date", "ph": "TT.MM.JJJJ"}], "wrong": ["Das war ein anderer Tag. Rechnet drei Tage zurück."], "success": "Ein Platz trägt seinen Namen. Danke, dass ihr euch Zeit nehmt.", "unlock": [{"kind": "note", "title": "Notiz aus der Kartei", "text": "Er war nicht der Einzige, der nicht schweigen wollte."}, {"kind": "story", "title": "Hintergrund (historisch): Jan Palach", "text": "Jan Palach wurde am 11. August 1948 in Všetaty geboren und studierte an der Karls-Universität. Am 16. Januar 1969 setzte er sich auf dem Wenzelsplatz in Brand, aus Protest gegen die Lähmung nach der Niederschlagung des Prager Frühlings. Er starb am 19. Januar 1969. Seine Briefe forderten ein Ende der Zensur und einen Generalstreik. Die Ärztin, die ihn behandelte, schrieb später, er habe die Demoralisierung der Bevölkerung gemeint. Am 25. Februar 1969 folgte ihm Jan Zajíc. Zum 20. Todestag im Januar 1989 kam es zur „Palach-Woche“ mit Demonstrationen, die die Polizei brutal auflöste. Dieser Platz trägt heute seinen Namen."}], "nextplace": "Nächster Ort: Karlsbrücke, am Altstädter Brückenturm. Selma gibt Patrick dort die Karte von Emir.", "hints": ["Rechnet drei Tage zurück vom Sterbedatum.", "Der Tag war ein Donnerstag.", "Der 16. Januar."], "h": {"d": "57358996cdc3fd3d61cf6f1b42d5fdc1b0e8e96ff19d22ec64e58dce7030c933"}}, {"id": "st3", "kapitel": "Station 4", "title": "Das Wörterbuch", "place": "Karlsbrücke, am Altstädter Brückenturm", "paper": "Emirs Karte (P3), Wörterbuchseite (P3a), Vigenère-Tabelle (P3b)", "icon": "bridge", "scene": "Selma hat das Wörterbuch dabei. Emirs Karte ist verschlüsselt. Der Schlüssel ist ein Wort, das beide Sprachen teilen. Ihr steht gerade davor.", "fields": [{"id": "w", "label": "Lösungswort", "type": "text", "ph": "ein Wort"}], "wrong": ["Das ist kein Ort. Rechnet noch einmal."], "success": "Wien. Dort sitzt der Empfänger. Er heißt Emir.", "audio_hint": "a3", "unlock": [{"kind": "fragment", "name": "DER BESUCH", "group": "42"}, {"kind": "doc", "title": "Brief E. H. an L. O.", "text": "Ludmila, wenn der Befehl dreiundzwanzig kommt, verbrenne ich die Wiener Kopie. Ich habe die Namen im Kopf. Ich werde nie vergessen, wer sie sind."}, {"kind": "story", "title": "Hintergrund (historisch): Die Karlsbrücke", "text": "Die Brücke steht dort, wo die ältere Judithbrücke (1158 bis 1172) 1342 von einem Hochwasser zerstört wurde. Karl IV. ließ eine neue bauen. Nach der Überlieferung begann der Bau am 9. Juli 1357 um 5:31 Uhr, daher die Zahlenfolge 1-3-5-7-9-7-5-3-1, die sich in beide Richtungen gleich liest. Das ist eine Legende, belegt ist 1357 als Baubeginn. Die Brücke ist etwa 516 Meter lang und fast zehn Meter breit, 1402 war sie fertig. Die 30 Statuen sind meist barock, heute stehen Kopien. Ihren Namen Karlsbrücke trägt sie erst seit 1870. In den Achtzigern trafen hier auch Jugendliche der Lennon-Bewegung auf die Polizei."}], "nextplace": "Nächster Ort: Lennon-Wand, Velkopřevorské náměstí (über die Brücke, ca. 9 Minuten).", "hints": ["Der Schlüssel steht auf der Wörterbuchseite: ein Wort, das in zwei Sprachen gleich ist.", "Das Wort heißt auf Deutsch „Brücke“.", "Der Schlüssel ist M-O-S-T. Das erste Q wird mit M zu E. Auf Wunsch: Band drei."], "h": {"w": "1271c35e65317ee6255f9bfa08c019a184226ad5f3f16bdc04832d95903f6fda"}}, {"id": "st4", "kapitel": "Station 5", "title": "Die Mauer", "place": "Lennon-Wand, Velkopřevorské náměstí", "paper": "Zeugenprotokoll Aussagen 1 und 2 (P4a); Yvonne hat Aussage 3", "icon": "wall", "scene": "Hier schrieben Jugendliche, was man sonst nicht sagen durfte. Die Stimme hat drei Zeitzeugenaussagen. Eine davon kann nicht stimmen.", "fields": [{"id": "a", "label": "Nummer der Aussage (1, 2 oder 3)", "type": "int", "ph": "Zahl"}, {"id": "j", "label": "Jahr", "type": "year", "ph": "JJJJ"}], "wrong": ["Das passt nicht. Eine Aussage kann nicht stimmen. Prüft die Jahre."], "success": "Eine Erinnerung war zu früh. Die Wand begann erst, als Lennon fort war.", "unlock": [{"kind": "fragment", "name": "DIE MAUER", "group": "63"}, {"kind": "doc", "title": "Vermerk Dienststelle K-9 (2)", "text": "An der Wand versammeln sich Jugendliche. Namen notieren. Weitere Vermerke an Dienststelle K-9."}, {"kind": "story", "title": "Hintergrund (historisch): Die Lennon-Wand", "text": "Schon in den 1960ern schrieben Menschen Liebesgedichte und Protest auf diese Mauer. Nach der Ermordung John Lennons 1980 malte jemand sein Bild und einige Zeilen darauf. Im April 1981 übermalte die Obrigkeit es grün, am nächsten Tag standen wieder Botschaften da, darunter „Palach würde weinen“. Es blieb ein Katz-und-Maus-Spiel mit Kameras, Wachen und Farbe. 1988 prallten Hunderte Studierende auf der Karlsbrücke mit der Polizei zusammen, die Bewegung wurde „Lennonismus“ genannt. Die Mauer gehört dem Malteserorden. 2019 wurde sie saniert und zum Gedenkort erklärt."}], "nextplace": "Nächster Ort: Kampa, ruhige Bank im Park nahe am Ufer.", "hints": ["Alle drei sprechen über „vor oder nach Lennons Tod“.", "Aussage 3 nennt eine Differenz. Rechnet.", "Wer sagt „1979“?"], "h": {"a": "de4bce4b7f0e26c198afa74b0d4fd05c3ac5c0b525a1afe74d2cb108cc25f62c", "j": "637e04cf3f13675ac4db45835e95cc61b3eb3865a1d3e5e29fea4a9dcefc867f"}}, {"id": "st5", "kapitel": "Station 6", "title": "Die Charta", "place": "Kampa, Park am Ufer", "paper": "Zeugenzettel Nr. 61 (P5a); Selma hat die Kartei-Regel", "icon": "charter", "scene": "Die Kartei schreibt keine Namen auf, sondern Längen. Wer waren die drei Sprecher, die im Januar 1977 öffentlich auftraten?", "fields": [{"id": "z", "label": "Dreistellige Zahl", "type": "int", "ph": "drei Ziffern"}], "wrong": ["Die Länge stimmt nicht. Zählt die Buchstaben ohne Akzente."], "success": "Drei Namen, drei Zahlen. Die Kartei nennt keine Namen, sie schützt sie.", "unlock": [{"kind": "fragment", "name": "DIE CHARTA", "group": "08"}, {"kind": "note", "title": "Notiz von L. O.", "text": "Namen sind das Gefährlichste, was ich besitze. Aber sie sind auch das Einzige, was bleibt."}, {"kind": "story", "title": "Hintergrund (historisch): Charta 77", "text": "Im Januar 1977 erschien die Charta 77, ein Aufruf, die Menschenrechte einzuhalten, zu denen sich die Tschechoslowakei vertraglich verpflichtet hatte. Anlass war auch der Prozess gegen die Musiker der Band Plastic People of the Universe 1976. Erste Sprecher waren Václav Havel, Jan Patočka und Jiří Hájek. Wer unterschrieb, riskierte Verhör, Kündigung, Haft. Patočka starb im März 1977 nach Verhören. Die Charta war keine Partei, nur eine Haltung. Ihr Mut wirkte weit über die Zahl der Unterzeichner hinaus. Kampa liegt an der Čertovka, dem Teufelsbach,."}], "nextplace": "Nächster Ort: Vlašská 19. Bleibt auf der Straße davor und geht nicht hinein.", "hints": ["Der Philosoph starb am 13. März 1977.", "Bittet Yvonne um ihre Anmerkung (P5c).", "Zählt die Buchstaben ohne Akzente: P-A-T-O-C-K-A."], "h": {"z": "87873a58d117ada9e64101e852062f99243943b75e569ada39842f128374200e"}}, {"id": "st6", "kapitel": "Station 7", "title": "Das Palais", "place": "Vlašská 19, auf der Straße davor", "paper": "Kubáts Logbuch (P6a); Titelblatt in zwei Hälften (P6)", "icon": "palace", "scene": "Im Herbst 1989 drängten sich hier tausende Menschen. Das Gebäude arbeitet heute normal, bleibt also davor stehen und macht keine Fotos von Personen. Rechnet das Datum aus. Danach legt die beiden Hälften des Titelblatts zusammen.", "fields": [{"id": "d", "label": "Datum des Logbuch-Eintrags", "type": "date", "ph": "TT.MM.JJJJ"}], "wrong": ["Das war ein anderer Tag. Zählt die vierzig Tage zurück."], "success": "Der Tag, an dem das Wort „Ausreise“ fiel. Jetzt legt die Hälften aneinander.", "unlock": [{"kind": "fragment", "name": "DAS PALAIS", "group": "31"}, {"kind": "doc", "title": "Karte 23, vollständig", "text": "Die Namen auf diesen Zetteln sind die von Zeugen, nicht von Tätern, die sich erinnern wollen und deren Namen nur mit ihrem Einverständnis genannt werden dürfen. BEFEHL 23 (E. H. / L. O.): Bei Gefahr vernichtet E. H. die Wiener Kopie."}, {"kind": "story", "title": "Hintergrund (historisch): 30. September 1989", "text": "Im Sommer 1989 suchten tausende DDR-Bürger Zuflucht in der westdeutschen Botschaft im Palais Lobkowicz. Der Garten war ein Zeltlager, auf den Straßen standen zurückgelassene Trabis. Am Abend des 30. September 1989 trat Außenminister Hans-Dietrich Genscher auf den Balkon und verkündete die Ausreise. Die Züge fuhren durch die DDR. Am 3. Oktober schloss die DDR die Grenze zur ČSSR, am 9. November fiel die Mauer. Eure Spielszene ist erfunden, die Botschaft und der Abend sind real."}], "nextplace": "Band zwei ist da. Hört gemeinsam zu.", "hints": ["An welchem Tag fiel die Mauer? (9. November)", "Zählt 40 Tage zurück.", "Der Eintrag ist ein Samstag im September oder Oktober."], "h": {"d": "e83acd843861e3b0bc7310101b38edceb7bb5d432ef0aae2d51adc791d165142"}}, {"id": "aud2", "kapitel": "Band zwei", "title": "Kubát am Band", "place": "Hier, vor der Vlašská 19", "audio": "a2", "paper": "Kopfhörer teilen oder Lautsprecher", "icon": "tape", "scene": "Vojtěch Kubát hat im Januar 1990 sein Logbuch besprochen. Hört genau zu. Er sagt, wie er die Wörter gesendet hat.", "fields": [{"id": "d", "label": "Datum der Sendenacht", "type": "date", "ph": "TT.MM.JJJJ"}], "wrong": ["Das ist nicht die Nacht. Welcher Tag war Karte G?"], "success": "Die Nacht stimmt. Der Rest öffnet sich.", "unlock": [], "nextplace": "Nächster Ort: Denkmal für die Opfer des Kommunismus am Újezd. Dort wartet die Zahl.", "hints": ["Welcher Tag war Karte G in Station 2? (24.11.)", "Der Tag davor."], "h": {"d": "b8749c3bd5949c857dbf4f3de934fe9e3d81e62a5c40b2ba7e2b386c205bff88"}}, {"id": "fina", "kapitel": "Finale 1", "title": "Die Zahl der Hingerichteten", "place": "Denkmal für die Opfer des Kommunismus, Újezd", "paper": "Bronzeband am Denkmal", "icon": "stairs", "scene": "Das Denkmal zeigt Figuren auf einer Treppe, die nach und nach Substanz verlieren. Auf dem Bronzeband stehen Zahlen für die Jahre 1948 bis 1989. Lest die Zahl der Hingerichteten ab.", "fields": [{"id": "z", "label": "Zahl der Hingerichteten", "type": "int", "ph": "Zahl"}], "wrong": ["Das ist nicht die Zahl der Hingerichteten."], "success": "Diese Zahl gehört zu Menschen. Jetzt das Sendeblatt.", "unlock": [{"kind": "story", "title": "Hintergrund (historisch): Das Denkmal", "text": "Der Bildhauer Olbram Zoubek schuf das Denkmal mit den Architekten Jan Kerel und Zdeněk Holzel. Es wurde am 22. Mai 2002 enthüllt. Sechs Bronzefiguren steigen eine Treppe hinauf, jede ist stärker zerstört. Sie stehen für die Behandlung politischer Gefangener, und alle bleiben aufrecht. Der Streifen in der Mitte nennt geschätzte Zahlen: 205.486 Verhaftete, 170.938 Exilierte, 4.500 Tote im Gefängnis, 327 Erschossene auf der Flucht, 248 Hingerichtete. Über das Werk wird gestritten, etwa weil keine Frau darunter ist. Es erinnert an alle Opfer."}], "nextplace": "Letzte Aufgabe: Die Botschaft.", "hints": ["Die Zahlen stehen auf dem Bronzestreifen und auf den Tafeln.", "Gesucht ist die Zahl der Hingerichteten.", "Wenn es zu dunkel ist: Handylicht."], "h": {"z": "21cf74973d55102c9155201b4fbbb04bd57af4c359d93763e836ee25176bc39a"}}, {"id": "finb", "kapitel": "Finale 2", "title": "Die letzte Übermittlung", "place": "Denkmal für die Opfer des Kommunismus, Újezd", "paper": "Sendeblatt (Patrick), Kartei-Register (Selma)", "icon": "radio", "scene": "Patrick hat sechs Ereignisse nach Alter geordnet. Selma übersetzt jede Gruppenzahl mit dem Register in ein Wort. Yvonnes Band nennt die Reihenfolge, in der Kubát gesendet hat. Setzt die Botschaft zusammen.", "fields": [{"id": "s", "label": "Die Botschaft", "type": "sentence", "ph": "sechs Wörter in der Sendereihenfolge"}], "wrong": ["Die Reihenfolge stimmt nicht. Hört Audio 2 noch einmal."], "success": "BEFEHL 23 WIDERRUFEN: AKTE ÖFFNEN. NICHT VERNICHTEN. ZEUGNIS GEBEN. Die Nachricht ist angekommen, Jahrzehnte zu spät, aber vollständig.", "unlock": [], "nextplace": "", "hints": ["Nehmt das Register und übersetzt jede Gruppe in ein Wort.", "Hört Audio 2 noch einmal. Wie zählt Kubát?", "Reihenfolge nach Alter der Ereignisse: 1, 2, 6, 4, 3, 5."], "h": {"s": "7e294dd82633b65484a5e4df5282926ee5cd67992da578e6c59e6ff099dbbc9f"}}], "trans": {"a1": ["[Papier raschelt.]", "Das ist Band eins.", "Wenn du das hörst, hast du den Zettel gelesen. Und du hast gemerkt, wie leicht sich Erinnerung biegen lässt.", "Seit dem Februar achtundvierzig lernen wir, dass man nicht sagen darf, was man weiß. Also schreibe ich es auf. Jede Karte ein Mensch.", "Die Karten liegen in Fach dreiundzwanzig. Und ich sage dir ehrlich: Es stehen Namen darauf. Namen sind das Gefährlichste, was ich besitze. Wenn es gefährlich wird, gilt Befehl dreiundzwanzig. Mehr sage ich auf Band nicht.", "Was ich als Nächstes brauche, liegt dort, wo ein Kaiser einen Stein gesetzt hat, zu einer Stunde, die man nicht vergisst: eins, drei, fünf, sieben, neun, sieben, fünf, drei, eins.", "Das Jahr davon ist dein nächster Schlüssel.", "[Klick. Rauschen.]"], "a2": ["[Funkpfeifen. Räuspern.]", "Hier Kubát. Das ist kein Funkspruch, das ist mein Logbuch, Januar neunzehnhundertneunzig.", "Ich weiß, was man über die Kartei glaubt. Eine Liste von Verrätern, Namen zum Aushängen. Das ist falsch. Es sind Zeugen. Jeder Name gehört einem Menschen, der wollte, dass es jemand weiß.", "Befehl dreiundzwanzig hieß: Bei Gefahr vernichten. In der Nacht vor dem Rücktritt der gesamten Führung wollte ich ihn widerrufen. Dem Tag, den ich auf meinem Protokoll mit G markiert hatte. Dass sie am nächsten Tag gehen würden, wusste ich nicht.", "Ich habe sechs Wörter gesendet. Ich habe sie nicht nach dem Alter der Ereignisse gesendet. Zählt die Ereignisse so: das älteste ist das erste. Gesendet habe ich: das erste, das zweite, dann das sechste, das vierte, das dritte, und zuletzt das fünfte.", "Bei Emir kam nur „Befehl dreiundzwanzig“ an. Nichts mehr. Er hat gewartet. Er hat nicht verbrannt.", "Nenn mir das Datum der Nacht, in der ich gesendet habe. Dann öffnet sich der Rest.", "[Rauschen. Klick.]"], "a3": ["Ključ je ono preko čega hodaš.", "Der Schlüssel ist das, worüber du gehst. Nicht über den Fluss: über das Wort, das beide Sprachen teilen."], "a4": ["Ich habe nie gewusst, wer es lesen wird. Ich habe nur gewusst, dass es gelesen werden muss.", "Wenn du das hörst, dann bist du der Beweis. Mehr braucht eine Kartei nicht.", "Drei Fragen lasse ich euch da, für die Bank, wenn die Sonne untergeht.", "Erstens: Wenn nur die Hälfte einer Nachricht ankommt, wer entscheidet dann, was sie bedeuten soll? Und wer trägt Verantwortung dafür, dass sie vollständig wird?", "Zweitens: Was hättet ihr an Emirs Stelle getan?", "Drittens: Was verpflichtet uns, Zeugnis zu geben, wenn niemand mehr zuhört?", "Ihr müsst nichts davon lösen. Redet darüber."]}, "audio": {"a1": {"title": "Band eins · Ludmila Ostrá", "src": "audio/audio1.mp3"}, "a2": {"title": "Band zwei · Vojtěch Kubát", "src": "audio/audio2.mp3"}, "a3": {"title": "Band drei · Emir Hadžić", "src": "audio/audio3.mp3"}, "a4": {"title": "Band vier · Ludmila Ostrá", "src": "audio/audio4.mp3"}}, "pin": "b275a69d9a1ae4d2739b4a1e0e6389de57db3fc899598f81b66b9454f5084100", "K": [1116352408, 1899447441, 3049323471, 3921009573, 961987163, 1508970993, 2453635748, 2870763221, 3624381080, 310598401, 607225278, 1426881987, 1925078388, 2162078206, 2614888103, 3248222580, 3835390401, 4022224774, 264347078, 604807628, 770255983, 1249150122, 1555081692, 1996064986, 2554220882, 2821834349, 2952996808, 3210313671, 3336571891, 3584528711, 113926993, 338241895, 666307205, 773529912, 1294757372, 1396182291, 1695183700, 1986661051, 2177026350, 2456956037, 2730485921, 2820302411, 3259730800, 3345764771, 3516065817, 3600352804, 4094571909, 275423344, 430227734, 506948616, 659060556, 883997877, 958139571, 1322822218, 1537002063, 1747873779, 1955562222, 2024104815, 2227730452, 2361852424, 2428436474, 2756734187, 3204031479, 3329325298], "H0": [1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225]};
+const S = DATA.stations;
+const KEY = "akte2389-v1";
+
+/* ---------- SHA-256 ---------- */
+function sha256hex(str){
+  const K = DATA.K, Hh = DATA.H0.slice();
+  const bytes = Array.from(new TextEncoder().encode(str));
+  const bitLen = bytes.length * 8;
+  bytes.push(0x80);
+  while (bytes.length % 64 !== 56) bytes.push(0);
+  const hi = Math.floor(bitLen / 4294967296), lo = bitLen >>> 0;
+  bytes.push((hi>>>24)&255,(hi>>>16)&255,(hi>>>8)&255,hi&255,(lo>>>24)&255,(lo>>>16)&255,(lo>>>8)&255,lo&255);
+  const w = new Array(64);
+  for (let i = 0; i < bytes.length; i += 64){
+    for (let t = 0; t < 16; t++) w[t] = ((bytes[i+4*t]<<24)|(bytes[i+4*t+1]<<16)|(bytes[i+4*t+2]<<8)|bytes[i+4*t+3])>>>0;
+    for (let t = 16; t < 64; t++){
+      const x = w[t-15], y = w[t-2];
+      const s0 = ((x>>>7)|(x<<25))^((x>>>18)|(x<<14))^(x>>>3);
+      const s1 = ((y>>>17)|(y<<15))^((y>>>19)|(y<<13))^(y>>>10);
+      w[t] = (w[t-16] + s0 + w[t-7] + s1) >>> 0;
+    }
+    let a=Hh[0],b=Hh[1],c=Hh[2],d=Hh[3],e=Hh[4],f=Hh[5],g=Hh[6],h=Hh[7];
+    for (let t = 0; t < 64; t++){
+      const S1 = ((e>>>6)|(e<<26))^((e>>>11)|(e<<21))^((e>>>25)|(e<<7));
+      const ch = (e&f)^(~e&g);
+      const t1 = (h + S1 + ch + K[t] + w[t]) >>> 0;
+      const S0 = ((a>>>2)|(a<<30))^((a>>>13)|(a<<19))^((a>>>22)|(a<<10));
+      const mj = (a&b)^(a&c)^(b&c);
+      const t2 = (S0 + mj) >>> 0;
+      h=g; g=f; f=e; e=(d+t1)>>>0; d=c; c=b; b=a; a=(t1+t2)>>>0;
+    }
+    Hh[0]=(Hh[0]+a)>>>0; Hh[1]=(Hh[1]+b)>>>0; Hh[2]=(Hh[2]+c)>>>0; Hh[3]=(Hh[3]+d)>>>0;
+    Hh[4]=(Hh[4]+e)>>>0; Hh[5]=(Hh[5]+f)>>>0; Hh[6]=(Hh[6]+g)>>>0; Hh[7]=(Hh[7]+h)>>>0;
+  }
+  return Hh.map(x => x.toString(16).padStart(8, "0")).join("");
+}
+
+/* ---------- Normalisierung ---------- */
+function normText(s){
+  s = String(s).toUpperCase().replace(/Ä/g,"AE").replace(/Ö/g,"OE").replace(/Ü/g,"UE").replace(/ß/g,"SS");
+  return s.normalize("NFKD").replace(/[̀-ͯ]/g,"").replace(/[^A-Z0-9]/g,"");
+}
+const NUMW = {null:0,nul:0,ein:1,eins:1,eine:1,zwei:2,drei:3,vier:4,fuenf:5,"fünf":5,sechs:6,sieben:7,acht:8,neun:9,zehn:10,elf:11,zwoelf:12,"zwölf":12};
+function normInt(s){
+  s = String(s).trim().toLowerCase();
+  if (Object.prototype.hasOwnProperty.call(NUMW, s)) return String(NUMW[s]);
+  const d = s.replace(/\D/g, "");
+  return d ? String(parseInt(d, 10)) : "";
+}
+const MON = {januar:1,jan:1,februar:2,feb:2,"märz":3,maerz:3,marz:3,mrz:3,april:4,apr:4,mai:5,juni:6,jun:6,juli:7,jul:7,august:8,aug:8,september:9,sep:9,sept:9,oktober:10,okt:10,november:11,nov:11,dezember:12,dez:12};
+function pad(n){ return String(n).padStart(2, "0"); }
+function normDate(s){
+  s = String(s).trim().toLowerCase();
+  let d, m, y, r;
+  if ((r = s.match(/^(\d{4})\s*-\s*(\d{1,2})\s*-\s*(\d{1,2})$/))) { y = +r[1]; m = +r[2]; d = +r[3]; }
+  else if ((r = s.match(/^(\d{1,2})\s*[.\/-]\s*(\d{1,2})\s*[.\/-]?\s*(\d{2,4})$/))) { d = +r[1]; m = +r[2]; y = +r[3]; }
+  else if ((r = s.match(/^(\d{1,2})\s*\.?\s*([a-zäöü]+)\.?\s*(\d{2,4})$/)) && MON[r[2]]) { d = +r[1]; m = MON[r[2]]; y = +r[3]; }
+  else return "";
+  if (y < 100) y += 1900;
+  if (m < 1 || m > 12 || d < 1 || d > 31) return "";
+  return y + "-" + pad(m) + "-" + pad(d);
+}
+function normField(type, v){
+  if (type === "text" || type === "sentence") return normText(v);
+  if (type === "date") return normDate(v);
+  return normInt(v);
+}
+
+/* ---------- Zustand ---------- */
+const fresh = () => ({cur:0, solved:{}, shown:false, hints:{}, since:{}, lastHint:{}, aud:{}, finished:false, tab:"task", view:null});
+let st = fresh();
+let memOnly = false;
+try { const r = localStorage.getItem(KEY); if (r) st = Object.assign(fresh(), JSON.parse(r)); } catch(e){ memOnly = true; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e){} }
+const gm = {open:false, ok:false, taps:[], release:{}};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function stationNow(){ return S[Math.min(st.cur, S.length-1)]; }
+function fragmentsOf(){
+  const out = [];
+  S.forEach(s => { if (st.solved[s.id]) s.unlock.filter(u => u.kind==="fragment").forEach(u => out.push(u)); });
+  return out;
+}
+
+function renderFrags(){
+  const got = fragmentsOf(), box = $("#frags");
+  box.hidden = got.length === 0;
+  box.innerHTML = got.map(f => `<div class="frag on"><b>${esc(f.group)}</b><span>${esc(f.name)}</span></div>`).join("");
+  const last = box.lastElementChild;
+  if (last && st.shown && st.solved[stationNow().id]) last.classList.add("new");
+}
+
+/* ---------- Audio ---------- */
+function audioCard(key){
+  const a = DATA.audio[key];
+  const tr = DATA.trans[key].map(p => `<p>${esc(p)}</p>`).join("");
+  return `<div class="audio" data-audio="${key}">
+    <h3>${esc(a.title)}</h3>
+    <audio controls preload="auto" src="${esc(a.src)}">Dein Browser kann das Band nicht abspielen.</audio>
+    <p class="small fb" hidden>Die Aufnahme ist nicht erreichbar. Yvonne liest den Text vor, oder ihr lest ihn unten gemeinsam.</p>
+    <button type="button" class="btn ghost trbtn">Text anzeigen</button>
+    <div class="trans" hidden>${tr}</div>
+  </div>`;
+}
+function transReleased(key){
+  if (gm.release[key]) return true;
+  const a = st.aud[key] || {};
+  if (a.err) return true;
+  return !!(a.played && Date.now() - a.played >= 120000);
+}
+function wireAudio(root){
+  root.querySelectorAll("[data-audio]").forEach(card => {
+    const key = card.dataset.audio, au = card.querySelector("audio"), fb = card.querySelector(".fb");
+    const tb = card.querySelector(".trbtn"), tx = card.querySelector(".trans");
+    const fail = () => { st.aud[key] = Object.assign(st.aud[key]||{}, {err:true}); save(); fb.hidden = false; tx.hidden = false; tb.hidden = true; };
+    au.addEventListener("error", fail);
+    au.addEventListener("play", () => { if (!(st.aud[key]||{}).played){ st.aud[key] = Object.assign(st.aud[key]||{}, {played:Date.now()}); save(); } });
+    setTimeout(() => { if (au.error || au.networkState === 3) fail(); }, 4000);
+    tb.addEventListener("click", () => { if (transReleased(key)){ tx.hidden = !tx.hidden; tb.textContent = tx.hidden ? "Text anzeigen" : "Text verbergen"; } });
+    if ((st.aud[key]||{}).err) fail();
+  });
+}
+
+/* ---------- Hinweise ---------- */
+function hintReadyAt(s){
+  const n = st.hints[s.id] || 0;
+  if (gm.release["h:"+s.id]) return 0;
+  if (n === 0) return (st.since[s.id] || Date.now()) + 120000;
+  return (st.lastHint[s.id] || 0) + 180000;
+}
+function hintsHTML(s){
+  const n = st.hints[s.id] || 0;
+  const shown = s.hints.slice(0, n).map(h => `<div class="hint">${esc(h)}</div>`).join("");
+  const hb = n >= s.hints.length
+    ? `<span>Alle Hinweise genutzt.</span>`
+    : `<button type="button" class="btn ghost" id="hintbtn">Hinweis</button><span id="hintinfo"></span>`;
+  const extra = (n >= s.hints.length && s.audio_hint) ? audioCard(s.audio_hint) : "";
+  return `<div class="hints">${shown}<div class="hintbar">${hb}<span class="small">${n}/${s.hints.length}</span></div>${extra}</div>`;
+}
+function fmt(ms){ const t = Math.max(0, Math.ceil(ms/1000)); return Math.floor(t/60) + ":" + pad(t%60); }
+function tick(){
+  const s = stationNow();
+  const b = $("#hintbtn");
+  if (b){
+    const left = hintReadyAt(s) - Date.now();
+    const info = $("#hintinfo");
+    if (left > 0){ b.disabled = true; info.textContent = "Nächster Hinweis in " + fmt(left); }
+    else { b.disabled = false; info.textContent = "Bereit"; }
+  }
+  document.querySelectorAll("[data-audio]").forEach(card => {
+    const key = card.dataset.audio, tb = card.querySelector(".trbtn");
+    if (!tb || tb.hidden) return;
+    if (transReleased(key)){ tb.disabled = false; }
+    else {
+      tb.disabled = true;
+      const p = (st.aud[key]||{}).played;
+      tb.textContent = p ? "Text in " + fmt(p + 120000 - Date.now()) : "Text nach dem Anhören";
+    }
+  });
+}
+setInterval(tick, 1000);
+
+/* ---------- Ansichten ---------- */
+function unlockHTML(items){
+  return items.filter(u => u.kind !== "fragment").map(u =>
+    `<div class="doc ${u.kind}"><div class="dk"><span>${esc(u.title)}</span><span>FIKTION</span></div><p class="tx">${esc(u.text)}</p></div>`).join("");
+}
+function fragHTML(items){
+  return items.filter(u => u.kind === "fragment").map(u =>
+    `<div class="fm"><div class="t">FUNKFRAGMENT FREIGESCHALTET</div><div class="big">${esc(u.name)} · Gruppe ${esc(u.group)}</div><p class="small">Tragt es ins Sendeblatt ein: Ereignis, Datum und Gruppenzahl.</p></div>`).join("");
+}
+function maxIdx(){ return st.finished ? S.length : st.cur; }
+function viewIdx(){ const m = maxIdx(); return (st.view == null || st.view > m) ? m : st.view; }
+function navHTML(){
+  const v = viewIdx(), m = maxIdx();
+  const back = v > 0 ? `<button type="button" class="btn ghost" id="nav-back">← Zurück</button>` : "";
+  const fwd = v < m ? `<button type="button" class="btn ghost" id="nav-fwd">Weiter →</button>` : "";
+  return (back || fwd) ? `<div class="row nav">${back}${fwd}</div>` : "";
+}
+function wireNav(){
+  const v = viewIdx(), m = maxIdx(), b = $("#nav-back"), f = $("#nav-fwd");
+  if (b) b.addEventListener("click", () => { st.view = v - 1; save(); render(); window.scrollTo({top:0}); });
+  if (f) f.addEventListener("click", () => { st.view = (v + 1 >= m) ? null : v + 1; save(); render(); window.scrollTo({top:0}); });
+}
+function topHTML(){ return navHTML() + progressHTML(); }
+function renderReview(v){
+  const s = S[v], n = st.hints[s.id] || 0;
+  const hs = s.hints.slice(0, n).map(h => `<div class="hint">${esc(h)}</div>`).join("");
+  $("#main").innerHTML = `<div class="sheet">${topHTML()}
+    <div class="kap"><span>${esc(s.kapitel)}</span><span>Rückblick</span></div>
+    <h1>${esc(s.title)}</h1>
+    <dl class="meta"><dt>Ort</dt><dd>${esc(s.place)}</dd><dt>Papier</dt><dd>${esc(s.paper)}</dd></dl>
+    <p>${esc(s.scene)}</p>
+    ${s.audio ? audioCard(s.audio) : ""}
+    ${hs ? `<div class="hints">${hs}</div>` : ""}
+    <p class="msg ok">${esc(s.success)}</p>
+    ${fragHTML(s.unlock)}${unlockHTML(s.unlock)}
+    ${s.nextplace ? `<p class="next">${esc(s.nextplace)}</p>` : ""}
+  </div>`;
+  wireAudio($("#main"));
+}
+function progressHTML(){
+  return `<div class="pbar" aria-hidden="true">${S.map((s,i) => `<i class="${st.solved[s.id] ? "d" : ""}"></i>`).join("")}</div>`;
+}
+function renderTask(){
+  const m = $("#main");
+  if (st.finished){ return renderFinish(); }
+  const s = stationNow();
+  if (st.solved[s.id] && st.shown){
+    const last = s.id === "finb";
+    m.innerHTML = `<div class="sheet">
+      ${topHTML()}
+      <div class="kap"><span>${esc(s.kapitel)}</span><span>gelöst</span></div>
+      <h1>${esc(s.title)}</h1>
+      <p class="msg ok">${esc(s.success)}</p>
+      ${fragHTML(s.unlock)}${unlockHTML(s.unlock)}
+      ${s.nextplace ? `<p class="next">${esc(s.nextplace)}</p>` : ""}
+      <button class="btn" id="go">${last ? "Zur Auflösung" : "Weiter"}</button>
+    </div>`;
+    $("#go").addEventListener("click", () => {
+      if (last){ st.finished = true; }
+      else { st.cur++; st.view = null; st.shown = false; st.since[S[st.cur].id] = Date.now(); }
+      save(); render(); window.scrollTo({top:0});
+    });
+    return;
+  }
+  if (!st.since[s.id]) { st.since[s.id] = Date.now(); save(); }
+  const fields = s.fields.map(f => `<label for="f-${f.id}">${esc(f.label)}
+      <input type="text" id="f-${f.id}" name="${f.id}" placeholder="${esc(f.ph)}" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" ${f.type==="int"||f.type==="year" ? 'inputmode="numeric"' : ""}></label>`).join("");
+  m.innerHTML = `<div class="sheet">
+    ${topHTML()}
+    <div class="kap"><span>${esc(s.kapitel)}</span><span>Akte 23/89</span></div>
+    <h1>${esc(s.title)}</h1>
+    <dl class="meta"><dt>Ort</dt><dd>${esc(s.place)}</dd><dt>Papier</dt><dd>${esc(s.paper)}</dd></dl>
+    <p>${esc(s.scene)}</p>
+    ${s.audio ? audioCard(s.audio) : ""}
+    <form id="form" novalidate>${fields}<button class="btn" type="submit">Absenden</button><p class="msg" id="msg" role="status" aria-live="polite"></p></form>
+    <div id="hintwrap">${hintsHTML(s)}</div>
+  </div>`;
+  wireAudio(m); wireHints(s);
+  $("#form").addEventListener("submit", ev => { ev.preventDefault(); submit(s); });
+  tick();
+}
+function wireHints(s){
+  const b = $("#hintbtn");
+  if (b) b.addEventListener("click", () => {
+    if (hintReadyAt(s) > Date.now()) return;
+    st.hints[s.id] = (st.hints[s.id]||0) + 1; st.lastHint[s.id] = Date.now(); delete gm.release["h:"+s.id]; save();
+    const aBefore = document.querySelectorAll("[data-audio]").length;
+    $("#hintwrap").innerHTML = hintsHTML(s); wireAudio($("#hintwrap")); wireHints(s); tick();
+  });
+}
+function submit(s){
+  const msg = $("#msg");
+  const bad = [];
+  let empty = false;
+  s.fields.forEach(f => {
+    const raw = ($("#f-"+f.id).value || "").trim();
+    if (!raw){ empty = true; bad.push(f.id); return; }
+    const h = sha256hex(s.id + ":" + f.id + ":" + normField(f.type, raw));
+    if (h !== s.h[f.id]) bad.push(f.id);
+  });
+  if (empty && bad.length === s.fields.length){ msg.className = "msg"; msg.textContent = "Bitte zuerst etwas eintragen."; return; }
+  if (!bad.length){
+    st.solved[s.id] = true; st.shown = true; save(); render(); window.scrollTo({top:0}); return;
+  }
+  const texts = [];
+  bad.forEach(id => { const t = (s.fw && s.fw[id]) || s.wrong[0]; if (!texts.includes(t)) texts.push(t); });
+  msg.className = "msg shake"; msg.textContent = texts.join(" ");
+  const form = $("#form"); form.classList.remove("shake"); void form.offsetWidth; form.classList.add("shake");
+}
+function renderFinish(){
+  $("#main").innerHTML = `<div class="sheet">
+    ${topHTML()}
+    <div class="kap"><span>Epilog</span><span>keine Aufgabe mehr</span></div>
+    <h1>BEFEHL 23 WIDERRUFEN</h1>
+    <p class="quote">Akte öffnen. Nicht vernichten. Zeugnis geben.</p>
+    <p>Die Nachricht ist angekommen, Jahrzehnte zu spät, aber vollständig. Hier steht, was wirklich geschah.</p>
+    <div class="doc"><div class="dk"><span>Was wirklich geschah</span><span>FIKTION</span></div>
+      <p>Die Kartei war nie eine Liste von Spitzeln, sondern eine Sammlung von Zeugen, deren Namen nur mit Einverständnis genannt werden durften.</p>
+      <p>Vojtěch Kubát wollte Befehl 23 („bei Gefahr vernichten“) in der Nacht vom 23. auf den 24. November 1989 widerrufen. In Wien kam nur „Befehl 23“ an. Emir hat darauf nicht gehandelt, sondern gewartet. Am 24. November trat die Parteiführung zurück.</p>
+      <p>Patricks Chronologie hat die Reihenfolge bestimmt. Selmas Register hat die Zahlen in Wörter verwandelt. Yvonnes Band hat die Sendereihenfolge genannt. Keiner von euch hätte die Botschaft allein gehabt.</p></div>
+    <p class="quote">Die Nachricht wurde nie vollständig gesendet. Sie wurde vollständig, weil jemand sie zu Ende gedacht hat.</p>
+    <p>Ein letztes Band ist für die Bank gedacht. Ludmila stellt euch drei Fragen. Spielt es ab, wenn die Sonne untergeht.</p>
+    ${audioCard("a4")}
+    <div class="doc"><div class="dk"><span>Epilog</span><span>historisch</span></div>
+      <p>Das Denkmal für die Opfer des Kommunismus am Fuß des Petřín wurde 2002 enthüllt. Die Zahlen auf dem Bronzeband sind kein Ersatz für Namen, und niemand von uns weiß, was in den Karteikästen der Welt noch liegt. Die Handlung der Akte ist erfunden, das Denkmal und seine Geschichte sind es nicht.</p></div>
+    <p class="small">Setzt euch. Das war die letzte Aufgabe.</p>
+  </div>`;
+  wireAudio($("#main"));
+}
+function renderAkte(){
+  const frs = fragmentsOf();
+  const docs = [];
+  S.forEach(s => { if (st.solved[s.id]) s.unlock.filter(u => u.kind !== "fragment").forEach(u => docs.push(u)); });
+  const auds = ["a1","a2"].filter(k => S.find(s => s.audio === k && st.solved[s.id]));
+  const rows = frs.map(f => `<tr><td>${esc(f.name)}</td><td>${esc(f.group)}</td></tr>`).join("");
+  $("#main").innerHTML = `<div class="sheet">
+    <div class="kap"><span>Akte 23/89</span><span>${docs.length} Dokumente</span></div>
+    <h2>Funkfragmente</h2>
+    ${frs.length ? `<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%"><thead><tr><th style="text-align:left;padding:4px 8px 4px 0">Fragment</th><th style="text-align:left;padding:4px 0">Gruppe</th></tr></thead><tbody>${rows}</tbody></table></div>` : `<p class="small">Noch keine Fragmente. Das erste gibt es an der Station „Der Balkon“.</p>`}
+    <h2>Dokumente</h2>
+    ${docs.length ? docs.map(u => `<div class="doc ${u.kind}"><div class="dk"><span>${esc(u.title)}</span><span>FIKTION</span></div><p class="tx">${esc(u.text)}</p></div>`).join("") : `<p class="small">Noch nichts freigeschaltet.</p>`}
+    ${auds.length ? `<h2>Bänder</h2>${auds.map(audioCard).join("")}` : ""}
+  </div>`;
+  wireAudio($("#main"));
+}
+function render(){
+  renderFrags();
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === st.tab)));
+  if (st.tab === "akte") renderAkte();
+  else { const v = viewIdx(); if (v < maxIdx()) renderReview(v); else if (st.finished) renderFinish(); else renderTask(); wireNav(); }
+  tick();
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { st.tab = t.dataset.tab; save(); render(); }));
+
+/* ---------- Spielleitung (5 Taps auf den Titel, dann PIN) ---------- */
+$("#mark").addEventListener("click", () => {
+  const now = Date.now(); gm.taps = gm.taps.filter(t => now - t < 4000); gm.taps.push(now);
+  if (gm.taps.length >= 5){ gm.taps = []; gm.open = !gm.open; renderGM(); }
+});
+function openGM(){ gm.open = !gm.open; renderGM(); if (gm.open) { const g = $("#gmslot"); if (g.scrollIntoView) g.scrollIntoView({block:"center"}); } }
+$("#gmopen").addEventListener("click", openGM);
+window.addEventListener("hashchange", () => { if (location.hash === "#sl") { gm.open = false; openGM(); } });
+function renderGM(){
+  const slot = $("#gmslot");
+  if (!gm.open){ slot.innerHTML = ""; return; }
+  if (!gm.ok){
+    slot.innerHTML = `<div class="gm"><h3>Spielleitung</h3><label for="pin">PIN<input type="password" id="pin" inputmode="numeric" autocomplete="off"></label><button class="btn" id="pinok">Öffnen</button><p class="msg" id="pinmsg"></p></div>`;
+    $("#pinok").addEventListener("click", () => {
+      if (sha256hex("pin:" + $("#pin").value) === DATA.pin){ gm.ok = true; renderGM(); } else { $("#pinmsg").textContent = "Falsche PIN."; }
+    });
+    return;
+  }
+  slot.innerHTML = `<div class="gm"><h3>Spielleitung</h3>
+    <p class="small">Aktuell: ${esc(stationNow().title)}${memOnly ? " (Speicher nicht verfügbar)" : ""}</p>
+    <div class="row"><button class="btn ghost" id="g-hint">Hinweis jetzt freigeben</button><button class="btn ghost" id="g-skip">Station überspringen</button><button class="btn ghost" id="g-tr">Texte der Bänder freigeben</button></div>
+    <label for="g-jump">Springe zu<select id="g-jump">${S.map((s,i) => `<option value="${i}" ${i===st.cur?"selected":""}>${i+1}. ${esc(s.title)}</option>`).join("")}</select></label>
+    <div class="row"><button class="btn ghost" id="g-go">Springen</button><button class="btn ghost" id="g-reset">Alles zurücksetzen</button><button class="btn ghost" id="g-close">Schließen</button></div>
+    <p class="msg" id="g-msg"></p></div>`;
+  $("#g-hint").addEventListener("click", () => { gm.release["h:"+stationNow().id] = true; tick(); $("#g-msg").textContent = "Hinweis ist bereit."; });
+  $("#g-tr").addEventListener("click", () => { ["a1","a2","a3","a4"].forEach(k => gm.release[k] = true); tick(); $("#g-msg").textContent = "Texte freigegeben."; });
+  $("#g-skip").addEventListener("click", () => { const s = stationNow(); st.solved[s.id] = true; st.shown = true; st.tab = "task"; save(); render(); });
+  $("#g-go").addEventListener("click", () => {
+    const i = +$("#g-jump").value;
+    st.solved = {}; S.forEach((s,k) => { if (k < i) st.solved[s.id] = true; });
+    st.cur = i; st.view = null; st.shown = false; st.finished = false; st.since[S[i].id] = Date.now(); st.tab = "task"; save(); render();
+  });
+  let armed = false;
+  $("#g-reset").addEventListener("click", () => {
+    if (!armed){ armed = true; $("#g-reset").textContent = "Wirklich zurücksetzen?"; return; }
+    st = fresh(); save(); gm.open = false; gm.ok = false; renderGM(); render();
+  });
+  $("#g-close").addEventListener("click", () => { gm.open = false; renderGM(); });
+}
+render();
+if (location.hash === "#sl") { gm.open = false; openGM(); }
+</script>
